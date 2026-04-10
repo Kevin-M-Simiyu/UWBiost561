@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-set.seed(10)
 ```
 
 # Instructions
@@ -47,17 +46,21 @@ for the course expectations.
 <mark>**Intent**: This question is simply for course logistics and for the course instructor to get to know you.</mark>
 
 - <u>**Question 0A**</u>: Please let me know your preferred name and preferred pronouns.
+-Preferred name: Simiyu M Kevin
+-Preferred pronouns: He/Him/His
 
 - <u>**Question 0B**</u>: Please read the syllabus in its entirety and write, "I have read 
 and understood the entire syllabus,"
-for this question. If you have any questions about the syllabus (for example, on 
-the homework submission policy or collaboration policy), you may ask them here.
+
+**I have read and understood the entire sylllabus**
 
 - <u>**Question 0C**</u>: If any, please briefly describe the courses you have taken at UW that 
-involve coding (in any language) so far and how familiar/comfortable you are in coding in R. (Note: I do not expect you to have 
-taken any such courses already.)
 
-- <u>**Question 0D**</u>: What do you hope to learn from this course? (It is alright if you leave this blank, but it would be helpful to hear your thoughts.)
+In the course BIOST514/517, BIOST515/518 the weekly assignements involved doing analyses using R which was great to refresh our knowledge and learn new things as far as handling data in R involves.
+
+- <u>**Question 0D**</u>: What do you hope to learn from this course? 
+
+I hope to learn how to use **R to do more complex analyses** and to be able to **write my own functions and packages in R**. I also hope to learn how to use GitHub for version control and collaboration.
 
 # Q1: Setting up an R package and GitHub
 
@@ -67,24 +70,10 @@ make an R package and a GitHub, which will be critical for this course.
 This question will be challenging for students who are not familiar with
 R Studio or GitHub, so please ask the instructor questions.</mark>
 
-Please read and walk through [https://docs.google.com/document/d/1sB5qwkeOWnCU-UUkHxOjqUTep0kgpvUi7qtHo7eV8oU/edit?usp=sharing](https://docs.google.com/document/d/1sB5qwkeOWnCU-UUkHxOjqUTep0kgpvUi7qtHo7eV8oU/edit?usp=sharing), as we have mentioned in class.
-Upon completion of this walkthrough, to get full marks for this question,
-you should have:
-
-1. Created a GitHub account,
-2. Created a private GitHub repository called `UWBiost561`,
-3. Created an R package, which is located in your GitHub repository `UWBiost561`,
-4. Created a vignette, which includes both `HW1.Rmd` and `HW1.html`
-under the `vignettes` folder, in your GitHub repository `UWBiost561`,
-5. Added the username `linnykos` as a Collaborator to your GitHub repository `UWBiost561`.
 
 <u>**Note**</u>: If you do not have a lot of familiarity with R Studio or GitHub,
 this question *will* be quite challenging (even though all you're doing is
-following through a walkthrough). Please start this early if you feel nervous
-about this because your instructor (Kevin) can better help you if you give
-him ample time and come to office hours.
-
-(You do not need to write anything for this question.)
+following through a walkthrough). 
 
 # Q2: Simulating the Central Limit Theorem
 
@@ -100,9 +89,12 @@ source("https://raw.githubusercontent.com/linnykos/561_s2026_public/main/HW1_fil
 This code sources the `generate_data` function into your current R workspace.
 
 <u>**Question 2A**</u>: 
-Read the function (either at the URL provided or by typing `generate_data` into your console), 
-and in one to three sentences, describe the input and output of the provided
-function and what the function is doing. You may use equations if needed.
+Read the function (either at the URL provided or by typing `generate_data` into your console),
+```{r}
+generate_data
+```
+
+The generate_data function generates a random sample of size nfrom a mixture of three distributions (Normal,Gamma and chi-square). The n must be a positive interger otherwise the function stops. Draws n random values from the set {1,2,3} with replacement. Create a vector of length n filled with Na which will store the final sampled values. From those observations in n, if the value is 1, find the positions count how many such position exist and then generate that many values from a normal(10,1) distribution and store them into sample_vec at those positions. It repeats for the value 2 and 3, but instead of normal distribution, it uses gamma distribution with shape 2 and scale 2 and chi-square distribution with degree of freedom 5 respectively. Finally, the output is a vector of length n with the sampled values from the mixture distribution.
 
 <u>**Question 2B**</u>: 
 We will now be using the `generate_data` function.
@@ -117,31 +109,31 @@ each trial), and plot a histogram of the 10,000 different empirical means with 1
 Repeat this process for `n` with values of 1, 2, 3, 5, and 100, and plot these six histograms
 in order of increasing `n`. 
 
-Figure \@ref(fig:clt) shows the desired plot you aim to reproduce. 
-In particular, reproduce the X- and Y-labels,
-the title of the plot, and the plot layout. 
-(Hint: You might find the `par` function useful, especially
-the `mar` and `mfrow` arguments, as well as the `paste`
-function. See the documentation for `par`.)
 
-```{r clt, out.width = "600px", fig.align="center", echo = FALSE, fig.cap=c("The figure you are trying to reproduce (without the Sample watermark) in Question 2B, barring the dimensions/proportions of the figure itself and randomness inherent to the simulation.")}
-knitr::include_graphics("https://raw.githubusercontent.com/linnykos/561_s2026_public/main/HW1_files/clt_editted.png")
+```{r}
+set.seed(1)
+simulatemeans=function(n,ntrials=10000){replicate(ntrials,mean(generate_data(n)))}
+nvalues=c(1,2,3,5,10,100)
+par(mfrow=c(2,3))
+for (n in nvalues){means=simulatemeans(n)
+hist(means,breaks=100,main=paste("n =",n),xlab="Sample mean",ylab="Frequency",col="lightblue",border="black")}
 ```
+
+
+
+
 
 <u>**Question 2C**</u>: 
 In one to three sentences, write how the plot you reproduced helps to verify 
 the Central Limit Theorem.
+
+The histogram show that when the sample size n is small, the distribution of the sample mean is skewed. As n increases, the distribution of the sample mean means becomes more symmetric and bell shaped. n=100, the histogram is approximately normal, illustrating the central limit theorem that sample means tend towards a nromal distribution regardless of the original data distribution.
 
 # Q3: Basic data analysis
 
 <mark>**Intent**: This question is a simple data analysis to demonstrate
 familiarity with how to perform basic operations in R.</mark>
 
-In this question, we'll load a simple dataset related to Alzheimer's Disease (AD) research.
-The data originates from a single-cell database from 
-[this study](https://portal.brain-map.org/explore/seattle-alzheimers-disease).
-However, since this is the first homework, we'll mainly work with donor-level
-data instead of the cell-level data.
 
 ```{r}
 df <- read.csv("https://raw.githubusercontent.com/linnykos/561_s2026_public/main/HW1_files/sea-ad.csv")
@@ -164,44 +156,75 @@ Here are brief descriptions of each variable:
 Hopefully, this is a reminder to carefully describe your study variables in any dataset you publish or collaborate on!
 
 <u>**Question 3A**</u>: Describe, in two to four sentences, what the `head(df)`
-and `summary(df)` results display. 
+
+**head(df)**
+
+Shows the first few 6 rows of a dataset, how the data are structured and what the values look like. It identify the variable names and data types.
+and `summary(df)` results display.
+
+**summary(df)**
+
+Shows the summary of each variable in the dataset. Provide statistical overview of each column.For numeric variables, it provides the minimum, 1st quartile, median, mean, 3rd quartile, and maximum values. For character variables, it shows the length, class, and mode of the variable.
 
 <u>**Question 3B**</u>: Use a simple function to print out the dimensionality
 of `df` (i.e., how many rows and columns there are). 
 What is the class of `df`?
-
-<u>**Question 3C**</u>: You'll note that in `summary(df)`, the variable `Age.at.Death`
-is a `character`, even though it should be a numeric. This is because
-there are values of `90+`. As a simple diagnostic, 1) replace all the `90+` values
-in `df$Age.at.Death` with `90`, 2) convert `df$Age.at.Death` from a character
-to a numeric, and 3) plot a histogram of `df$Age.at.Death`.
-
-Figure \@ref(fig:hist) shows the desired plot you aim to reproduce.
-
-```{r hist, out.width = "300px", fig.align="center", echo = FALSE, fig.cap=c("The figure you are trying to reproduce (without the Sample watermark) in Question 3C, barring the dimensions/proportions of the figure itself.")}
-knitr::include_graphics("https://raw.githubusercontent.com/linnykos/561_s2026_public/main/HW1_files/histogram-editted.png")
+```{r}
+dim(df)
+class(df)
 ```
 
-<u>**Question 3D**</u>: The `summary()` function is much more useful when the columns
-of `df` are factors, not characters. Write some lines of code to convert the variables
-`Sex`, `APOE4.Status`, `Cognitive.Status`, and `Braak` to be factors. (This should take
-less than 10 lines of code.)
+The dimension of the dataset is 84 rows and 7 columns. The class of the dataset is data.frame.
 
-<u>**Question 3E**</u>: With this new version of `df`, after finishing the previous
-questions, show the result of `summary(df)`.
+<u>**Question 3C**</u>: 
 
-Figure \@ref(fig:summary) shows the desired output you aim to reproduce.
-
-```{r summary, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c("The intended output of Question 3E.")}
-knitr::include_graphics("https://raw.githubusercontent.com/linnykos/561_s2026_public/main/HW1_files/summary-editted.png")
+```{r}
+df$Age.at.Death[df$Age.at.Death == "90+"] <- "90"
+df$Age.at.Death <- as.numeric(df$Age.at.Death)
 ```
 
-In one sentence, describe how the summary here (in Question 3E) is more
-informative than the summary shown at the start of Question 3.
+```{r}
+library(ggplot2)
+ggplot(df, aes(x=Age.at.Death)) + 
+  geom_histogram(binwidth=5, fill="lightblue", color="black") +
+  labs(title="Histogram of Age at Death", x="Age at Death", y="Frequency") +theme_minimal()
+```
+
+
+<u>**Question 3D**</u>: 
+
+```{r}
+df$Sex <- as.factor(df$Sex)
+df$APOE4.Status <- as.factor(df$APOE4.Status)
+df$Cognitive.Status <- as.factor(df$Cognitive.Status)
+df$Braak <- as.factor(df$Braak)
+```
+
+<u>**Question 3E**</u>: 
+
+```{r}
+knitr::kable(summary(df))
+```
+
+```{r}
+summary(df)
+```
+
+
+
+The **summary(df)** function, for numeric variables it provides the minimum, 1st quartile, median, mean, 3rd quartile, and maximum values. For character variables converted to factor shows the frequency (counts) of each level in the category.
 
 <u>**Question 3F**</u>: Using the `table()` function, display the relation
 between `Braak` and `Cognitive.Status`. Please look at `?table` (for the documentation
 of `table()`) if you are unfamiliar with this function.
+```{r}
+table(df$Braak)
+table(df$Cognitive.Status)
+knitr::kable(table(df$Braak, df$Cognitive.Status))
+```
+
+The number of those with dementia and no dementia is very small in early Braak stages (0, I, II), but as the Braak stage increases, the number of those with dementia and without dementia increases. In Braak V,VI there are more people with dementia than without dementia however in Braak IV, those without dementia are more than those with dementia.
+
 
 <u>**Question 3G**</u>: This question will be slightly challenging. The `table()`
 function is not as useful when there are many unique values (such as in `Last.CASI.Score`).
@@ -210,14 +233,23 @@ The goal is to use the `table()`, `cut()`, and `quantile()` to
 show the relation of the quantiles of `Last.CASI.Score` with `Cognitive.Status`.
 You will want to use `na.rm=TRUE` when using the `quantile()` function.
 
-Figure \@ref(fig:table) shows the desired output you aim to reproduce.
-
-```{r table, out.width = "200px", fig.align="center", echo = FALSE, fig.cap=c("The intended output of Question 3G.")}
-knitr::include_graphics("https://raw.githubusercontent.com/linnykos/561_s2026_public/main/HW1_files/table-editted.png")
+```{r}
+qs=quantile(df$Last.CASI.Score,probs=seq(0,1,0.25),na.rm=TRUE)
 ```
 
-In one to two sentences, describe what you can learn from the relation between
-`Last.CASI.Score` and `Cognitive.Status` based on this result.
+```{r}
+df$CASI.Quantiles=cut(df$Last.CASI.Score,breaks=qs,include.lowest=TRUE)
+```
+
+```{r}
+knitr::kable(table(df$CASI.Quantiles, df$Cognitive.Status))
+```
+
+
+Instead of dealing with many unique CASI scores, we categorize them into quantiles. The table shows the distribution of cognitive status across different CASI score quantiles. We see that as the CASI score increases (from Q1 to Q4), the number of individuals with dementia decreases, while the number of individuals without dementia increases. This suggests that higher CASI scores are associated with better cognitive status.
+
+
+
 
 # Q4: Pushing the homework onto GitHub
 
@@ -225,30 +257,9 @@ In one to two sentences, describe what you can learn from the relation between
 on submitting your homework. This procedure will 
 be the expectation for all future homeworks.</mark>
 
-Now that you have completed this homework, all that's remaining is to
-push this homework onto your `UWBiost561` GitHub repository.
-To do this, please ensure:
-
-1. Your file is named `HW1.Rmd`. (This current homework file you are
-writing in will replace the initial `HW1.Rmd` you made when
-you completed the walkthrough in Question 1.)
-2. Your file is in the `vignettes` folder in your `UWBiost561` R package.
-3. You push your two files, `HW1.Rmd` and `HW1.html` (the latter is the knitted HTML file) onto your GitHub repository.
-4. Double-check that you can see both files online on github.com when you look at your repository.
-5. *LASTLY*: Upload `HW1.html` to Canvas under "Assignment 1". (This is for university-wide policy, but also helps me keep track of completion status of homeworks via Canvas.)
-
-Again, ensure the username `linnykos` is added to your private GitHub repository. And with that, you're done! (For future homeworks, you will be "submitting" your homeworks like this.)
-
-(You do not need to write anything for this question.)
 
 # Q5: Feedback (Optional)
 
-This "question" is an additional way for students to communicate with instructors. 
-You could include positive feedback about topics you enjoyed learning this module, critiques about 
-the course difficulty/pacing, 
-or some questions/confusions you had about course material.
-Your feedback can help us shape the course for the rest of this quarter and 
-future years. Please be mindful and polite when providing feedback.
-You may leave this question blank.
+The classes are engaging and intuitive. the assignments help to improve mastery and retention.
 
 
