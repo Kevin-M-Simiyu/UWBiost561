@@ -1,5 +1,0 @@
----
-title: "HMW1"
-output: html_document
----
-
