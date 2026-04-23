@@ -17,4 +17,8 @@ Imports:
     mvtnorm,
     tibble
 Suggests:
-    testthat, knitr, markdown
+     knitr,
+  rmarkdown,
+  bookdown,
+  tidyverse,
+  ggplot2
