@@ -9,7 +9,7 @@
 generate_partial_clique <- function(n = 10,
                                     clique_fraction = 0.5,
                                     clique_edge_density = 0.9) {
-  
+
   # Input validation
   stopifnot(
     "n must be a positive integer" = is.numeric(n) && length(n) == 1 &&
@@ -23,14 +23,14 @@ generate_partial_clique <- function(n = 10,
   )
   n <- as.integer(n)
   m <- round(n * clique_fraction)      # number of clique nodes
-  
+
   # Initialize adjacency matrix with zeros
   adj_mat <- matrix(0L, nrow = n, ncol = n)
   diag(adj_mat) <- 1L
-  
+
   # Sample which nodes form the clique
   clique_nodes <- sample(1:n, size = m, replace = FALSE)
-  
+
   # Determine required number of clique edges
   max_edges <- m * (m - 1) / 2
   required_edges <- round(clique_edge_density * max_edges)
@@ -46,6 +46,10 @@ generate_partial_clique <- function(n = 10,
       adj_mat[j, i] <- 1L
     }
   }
-  
+
   list(adj_mat = adj_mat, clique_nodes = clique_nodes)
 }
+
+# -------------------------------------------------------------------------
+
+
