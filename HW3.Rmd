@@ -138,9 +138,9 @@ the following lines. (If you are copy-pasting the following R chunk,
 remove the `eval = FALSE` tag.)
 
 ```{r, eval = FALSE}
-library(UWBiost561)
+library(project561)
 set.seed(0)
-simulation <- UWBiost561::generate_partial_clique(
+simulation <- project561::generate_partial_clique(
   n = 10,
   clique_fraction = 0.5,
   clique_edge_density = 0.9
@@ -276,9 +276,9 @@ the following lines. (If you are copy-pasting the following R chunk,
 remove the `eval = FALSE` tag.)
 
 ```{r, eval = FALSE}
-library(UWBiost561)
+library(project561)
 set.seed(0)
-simulation <- UWBiost561::generate_partial_clique(
+simulation <- project561::generate_partial_clique(
   n = 10,
   clique_fraction = 0.5,
   clique_edge_density = 0.9
@@ -286,7 +286,7 @@ simulation <- UWBiost561::generate_partial_clique(
 
 adj_mat <- simulation$adj_mat
 
-res <- UWBiost561::compute_maximal_partial_clique(
+res <- project561::compute_maximal_partial_clique(
   adj_mat = adj_mat,
   alpha = 0.9
 )
@@ -385,20 +385,19 @@ went smoothly. You do not need to worry about what your screenshots show specifi
 
 Figure \@ref(fig:check1) and \@ref(fig:check2) shows the screenshots you are trying to reproduce.
 
-```{r check1, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c("The first screenshot you are trying to reproduce (without the Sample watermark) in Question 4C.")}
-knitr::include_graphics("https://github.com/linnykos/561_s2026_public/blob/main/HW3_files/check1_editted.png?raw=true")
+```{r check1, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The first screensho')}
+knitr::include_graphics("C:/Users/USER/Downloads/561hw3/screenshot2.png")
 ```
 
-```{r check2, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c("The second screenshot you are trying to reproduce (without the Sample watermark) in Question 4C.")}
-knitr::include_graphics("https://github.com/linnykos/561_s2026_public/blob/main/HW3_files/check2_editted.png?raw=true")
-
+```{r check2, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The second screenshot')}
+knitr::include_graphics("C:/Users/USER/Downloads/561hw3/screenshot1.png")
 ```
 
 
 <u>**Question 4D**</u>: Please include the following code chunk's result in your Markdown file. (If you are copy-pasting the following R chunk,
 remove the `eval = FALSE` tag.) This will be useful for me (Kevin) to assess which packages and R version you are using.
 
-```{r, eval = FALSE}
+```{r}
 devtools::session_info()
 ```
 
