@@ -1,4 +1,4 @@
 library(testthat)
-library(project561)
+library(UWBiost561)
 
-testthat::test_check("project561")
+testthat::test_check("UWBiost561")
