@@ -1596,9 +1596,9 @@ You do <em>not</em> do this in your R Markdown file.)</span></p>
 <p><u><strong>Question 1D</strong></u>: In your homework’s R Markdown file, show that your <code>generate_partial_clique()</code> function works. Specifically, run
 the following lines. (If you are copy-pasting the following R chunk,
 remove the <code>eval = FALSE</code> tag.)</p>
-<pre class="r"><code>library(project561)
+<pre class="r"><code>library(UWBiost561)
 set.seed(0)
-simulation &lt;- project561::generate_partial_clique(
+simulation &lt;- UWBiost561::generate_partial_clique(
   n = 10,
   clique_fraction = 0.5,
   clique_edge_density = 0.9
@@ -1719,9 +1719,9 @@ adjacency matrix outputted from your function <code>generate_partial_clique()</c
 Specifically, run
 the following lines. (If you are copy-pasting the following R chunk,
 remove the <code>eval = FALSE</code> tag.)</p>
-<pre class="r"><code>library(project561)
+<pre class="r"><code>library(UWBiost61)
 set.seed(0)
-simulation &lt;- project561::generate_partial_clique(
+simulation &lt;- UWBiost561::generate_partial_clique(
   n = 10,
   clique_fraction = 0.5,
   clique_edge_density = 0.9
@@ -1729,7 +1729,7 @@ simulation &lt;- project561::generate_partial_clique(
 
 adj_mat &lt;- simulation$adj_mat
 
-res &lt;- project561::compute_maximal_partial_clique(
+res &lt;- UWBiost561::compute_maximal_partial_clique(
   adj_mat = adj_mat,
   alpha = 0.9
 )
@@ -1843,7 +1843,7 @@ remove the <code>eval = FALSE</code> tag.) This will be useful for me (Kevin) to
 <pre class="r"><code>devtools::session_info()
 #&gt; Warning in system2(&quot;quarto&quot;, &quot;-V&quot;, stdout = TRUE, env = paste0(&quot;TMPDIR=&quot;, :
 #&gt; running command &#39;&quot;quarto&quot;
-#&gt; TMPDIR=C:/Users/USER/AppData/Local/Temp/Rtmp2vFeq7/file668853327c78 -V&#39; had
+#&gt; TMPDIR=C:/Users/USER/AppData/Local/Temp/Rtmp0mL8mI/file409079f70cc -V&#39; had
 #&gt; status 1
 #&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value
@@ -1855,7 +1855,7 @@ remove the <code>eval = FALSE</code> tag.) This will be useful for me (Kevin) to
 #&gt;  collate  English_United States.utf8
 #&gt;  ctype    English_United States.utf8
 #&gt;  tz       America/Los_Angeles
-#&gt;  date     2026-05-02
+#&gt;  date     2026-05-07
 #&gt;  pandoc   3.6.3 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
 #&gt;  quarto   NA @ C:\\PROGRA~1\\RStudio\\RESOUR~1\\app\\bin\\quarto\\bin\\quarto.exe
 #&gt; 
