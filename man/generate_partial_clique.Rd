@@ -13,9 +13,9 @@ generate_partial_clique(
 \arguments{
 \item{n}{Positive integer. Number of nodes in the graph.}
 
-\item{clique_fraction}{Numeric in \link{0,1}. Fraction of nodes that form the partial clique.}
+\item{clique_fraction}{Numeric in \verb{[0, 1]}. Fraction of nodes that form the partial clique.}
 
-\item{clique_edge_density}{Numeric in \link{0,1}. Edge density among the clique nodes.}
+\item{clique_edge_density}{Numeric in \verb{[0, 1]}. Edge density among the clique nodes.}
 }
 \value{
 A list with element \code{adj_mat}, a symmetric 0/1 matrix with 1s on the diagonal.

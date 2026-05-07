@@ -276,7 +276,7 @@ the following lines. (If you are copy-pasting the following R chunk,
 remove the `eval = FALSE` tag.)
 
 ```{r, eval = FALSE}
-library(UWBiost61)
+library(UWBiost561)
 set.seed(0)
 simulation <- UWBiost561::generate_partial_clique(
   n = 10,
@@ -397,7 +397,7 @@ knitr::include_graphics("C:/Users/USER/Downloads/561hw3/screenshot1.png")
 <u>**Question 4D**</u>: Please include the following code chunk's result in your Markdown file. (If you are copy-pasting the following R chunk,
 remove the `eval = FALSE` tag.) This will be useful for me (Kevin) to assess which packages and R version you are using.
 
-```{r}
+```{r, eval=FALSE}
 devtools::session_info()
 ```
 

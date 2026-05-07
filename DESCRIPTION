@@ -3,7 +3,7 @@ Title: Computational Biostatistics Homework Package
 Version: 0.0.0.9000
 Authors@R: 
     person("Kevin", "Simiyu", , "kevsim98@uw.edu", role = c("aut", "cre"))
-Description:  Functions for generating random graphs with partial cliques
+Description: Functions for generating random graphs with partial cliques
     and computing maximal partial cliques, developed for UW BIOST 561.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -11,16 +11,19 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Imports:
+    utils
+Suggests:
+    knitr,
+    rmarkdown,
+    bookdown,
+    tidyverse,
+    ggplot2,
+    testthat (>= 3.0.0),
     dplyr,
     magrittr,
     MASS,
     mvtnorm,
-    tibble
-Suggests:
-     knitr,
-  rmarkdown,
-  bookdown,
-  tidyverse,
-  ggplot2,
-  testthat (>= 3.0.0)
+    tibble,
+    devtools,
+    readr
 Config/testthat/edition: 3

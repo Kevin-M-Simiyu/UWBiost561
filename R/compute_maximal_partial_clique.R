@@ -9,15 +9,13 @@
 #'
 #' @param adj_mat A symmetric 0/1 matrix with 1s on the diagonal, no row/col
 #'   names, and between 5 and 50 rows/columns.
-#' @param alpha Numeric in [0.5, 1]. Required edge density among clique nodes.
+#' @param alpha Numeric in `[0.5, 1]`. Required edge density among clique nodes.
 #'
 #' @return A list with \code{clique_idx} (integer vector of node indices) and
 #'   \code{edge_density} (numeric, the actual edge density of the returned set).
 #' @export
 compute_maximal_partial_clique <- function(adj_mat, alpha) {
-
   # --- Input validation ---------------------------------------------------
-
   stopifnot(
     "adj_mat must be a matrix"            = is.matrix(adj_mat),
     "adj_mat must contain only 0s and 1s"  = all(adj_mat %in% c(0L, 1L)),
@@ -31,7 +29,6 @@ compute_maximal_partial_clique <- function(adj_mat, alpha) {
       length(alpha) == 1,
     "alpha must be between 0.5 and 1"      = alpha >= 0.5 && alpha <= 1
   )
-
   n <- nrow(adj_mat)
   # --- Helper: compute edge density for a set of nodes -------------------
   .edge_density <- function(idx) {
@@ -39,13 +36,10 @@ compute_maximal_partial_clique <- function(adj_mat, alpha) {
     if (m <= 1) return(1)
     (sum(adj_mat[idx, idx]) - m) / (m * (m - 1))
   }
-
   # --- Helper: greedy grow from a seed node ------------------------------
   .greedy_grow <- function(seed) {
     clique <- seed
     candidates <- setdiff(1:n, seed)
-
-    # Sort candidates by degree into current clique (descending)
     repeat {
       if (length(candidates) == 0) break
       scores <- sapply(candidates, function(v)
@@ -61,14 +55,12 @@ compute_maximal_partial_clique <- function(adj_mat, alpha) {
     }
     clique
   }
-
   # --- Helper: local search (swap to improve) ----------------------------
   .local_search <- function(clique) {
     improved <- TRUE
     while (improved) {
       improved <- FALSE
       outside <- setdiff(1:n, clique)
-      # Try adding a node from outside
       for (v in outside) {
         candidate <- c(clique, v)
         if (.edge_density(candidate) >= alpha) {
@@ -80,19 +72,14 @@ compute_maximal_partial_clique <- function(adj_mat, alpha) {
     }
     clique
   }
-
   # --- Main: multiple restarts, keep best result -------------------------
-  best_clique <- c(1)   # fallback: single node
-
-  # Degree-ordered seeds
-  degrees <- rowSums(adj_mat) - 1   # subtract diagonal
+  best_clique <- c(1)
+  degrees <- rowSums(adj_mat) - 1
   seed_order <- order(degrees, decreasing = TRUE)
-
   seeds_to_try <- unique(c(
-    seed_order[1:min(5, n)],     # top-5 highest degree
-    sample(1:n, min(10, n))      # random seeds
+    seed_order[1:min(5, n)],
+    sample(1:n, min(10, n))
   ))
-
   for (seed in seeds_to_try) {
     clique <- .greedy_grow(c(seed))
     clique <- .local_search(clique)
@@ -100,7 +87,6 @@ compute_maximal_partial_clique <- function(adj_mat, alpha) {
       best_clique <- clique
     }
   }
-
   list(
     clique_idx   = sort(best_clique),
     edge_density = .edge_density(best_clique)

@@ -10,7 +10,7 @@ compute_maximal_partial_clique(adj_mat, alpha)
 \item{adj_mat}{A symmetric 0/1 matrix with 1s on the diagonal, no row/col
 names, and between 5 and 50 rows/columns.}
 
-\item{alpha}{Numeric in \link{0.5, 1}. Required edge density among clique nodes.}
+\item{alpha}{Numeric in \verb{[0.5, 1]}. Required edge density among clique nodes.}
 }
 \value{
 A list with \code{clique_idx} (integer vector of node indices) and
