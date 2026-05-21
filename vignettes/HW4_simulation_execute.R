@@ -1,3 +1,4 @@
+.libPaths(c("~/R/library", .libPaths()))
 rm(list = ls())
 library(UWBiost561)
 
