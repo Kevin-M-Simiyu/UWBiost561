@@ -385,13 +385,13 @@ went smoothly. You do not need to worry about what your screenshots show specifi
 
 Figure \@ref(fig:check1) and \@ref(fig:check2) shows the screenshots you are trying to reproduce.
 
-```{r check1, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The first screensho')}
+#```{r check1, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The first screensho')}
 #knitr::include_graphics("C:/Users/USER/Downloads/561hw3/screenshot2.png")
-```
+#```
 
-```{r check2, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The second screenshot')}
+#```{r check2, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The second screenshot')}
 #knitr::include_graphics("C:/Users/USER/Downloads/561hw3/screenshot1.png")
-```
+#```
 
 
 <u>**Question 4D**</u>: Please include the following code chunk's result in your Markdown file. (If you are copy-pasting the following R chunk,
