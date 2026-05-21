@@ -386,11 +386,11 @@ went smoothly. You do not need to worry about what your screenshots show specifi
 Figure \@ref(fig:check1) and \@ref(fig:check2) shows the screenshots you are trying to reproduce.
 
 ```{r check1, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The first screensho')}
-knitr::include_graphics("D:/UoN/UW_2025/Spring_2026/BIOST_561/project/UWBiost561/screenshot2.png")
+knitr::include_graphics("screenshot2.png")
 ```
 
 ```{r check2, out.width = "400px", fig.align="center", echo = FALSE, fig.cap=c('The second screenshot')}
-knitr::include_graphics("D:/UoN/UW_2025/Spring_2026/BIOST_561/project/UWBiost561/screenshot1.png")
+knitr::include_graphics("screenshot1.png")
 ```
 
 
