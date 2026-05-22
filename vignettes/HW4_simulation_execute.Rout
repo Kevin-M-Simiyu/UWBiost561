@@ -1,0 +1,47 @@
+
+R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> rm(list = ls())
+> library(UWBiost561)
+> 
+> alpha_levels      <- c(0.5, 0.7, 0.9, 1.0)
+> n_trials          <- 10
+> n                 <- 20
+> clique_fraction   <- 0.5
+> clique_edge_density <- 0.95
+> time_limit        <- 30
+> 
+> simulation_results <- UWBiost561::run_simulation(
++   alpha_levels        = alpha_levels,
++   n_trials            = n_trials,
++   n                   = n,
++   clique_fraction     = clique_fraction,
++   clique_edge_density = clique_edge_density,
++   time_limit          = time_limit
++ )
+> 
+> date_of_run  <- Sys.time()
+> session_info <- devtools::session_info()
+> 
+> save(simulation_results, alpha_levels, date_of_run, session_info,
++      file = "~/HW4_simulation.RData")
+> 
+> proc.time()
+   user  system elapsed 
+853.169   0.408 853.943 
