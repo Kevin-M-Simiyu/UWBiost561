@@ -2,7 +2,7 @@ rm(list = ls())
 library(UWBiost561)
 
 # Load simulation results
-load("~/HW4_simulation.RData")
+load("HW4_simulation.RData")
 
 # Summarize
 summary_valid <- aggregate(valid ~ alpha + method, data = simulation_results, FUN = mean)
