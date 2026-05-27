@@ -319,6 +319,9 @@ result
 ```
 
 
+In this example, it does not time-out even for the smallest time interval.
+
+
 <u>**Question 2B**</u>: Describe what you would like your simulation to study in a few sentences. Specifically, you are making a <u>**simulation plan**</u> (see Lecture 8 for details).
 
 Your plan should answer the following questions:
@@ -407,6 +410,18 @@ figures inside this R Markdown file.
 The intent of this question is to provide "evidence" that your `devtools::check()`
 went smoothly. You do not need to worry about what your screenshots show specifically.
 
+```{r}
+knitr::include_graphics("D:/UoN/UW_2025/Spring_2026/BIOST_561/project/UWBiost561/Screenshot093331.png")
+
+```
+
+```{r}
+knitr::include_graphics("D:/UoN/UW_2025/Spring_2026/BIOST_561/project/UWBiost561/Screenshot093448.png")
+```
+
+
+
+
 # Q3: Performing the simulation study
 
 <mark>**Intent**: The intent of this question is to perform the simulation study and to practice visualizing simulation results.</mark>
@@ -460,6 +475,11 @@ Finally, include your plot in this R Markdown file. (I'm having you put your plo
 I will release the final project specifications (again, which involve making a PkgDown website of any R package of your choosing of any scope) on Canvas. This will be released (at the latest) by May 25th.
 
 Please write (in one to five sentences) what you are thinking of doing for your final project. If your answer hasn't changed since HW3, you can copy-paste your answer from HW3 into this question for HW4.
+
+I have no plan to make any package but use the UWBiost561 package.
+
+
+
 
 # Q5: Feedback (Optional)
 
