@@ -1,0 +1,147 @@
+---
+title: "Getting Started with UWBiost561"
+author: "Kevin Simiyu"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    number_sections: false
+    toc: true
+    toc_float:
+      toc_collapsed: true
+    theme: united
+vignette: >
+  %\VignetteIndexEntry{Getting Started with UWBiost561}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+This vignette demonstrates the core functionality of the `UWBiost561` package.
+The package provides tools for:
+
+1. Generating random adjacency matrices with embedded partial cliques
+2. Computing the maximal partial clique from an adjacency matrix
+
+No external data is needed — all examples use synthetic data generated
+directly by the package functions.
+
+## Generating a Random Graph with a Partial Clique
+
+The `generate_partial_clique()` function creates a random adjacency matrix
+with an embedded partial clique of a specified size and edge density.
+
+```{r}
+library(UWBiost561)
+
+set.seed(10)
+simulation <- UWBiost561::generate_partial_clique(
+  n = 10,
+  clique_fraction = 0.5,
+  clique_edge_density = 0.9
+)
+```
+
+The function returns a list. The main output is `adj_mat`, a symmetric
+binary matrix where `1` indicates an edge between two nodes:
+
+```{r}
+simulation$adj_mat
+```
+
+Here, `n = 10` means 10 nodes, `clique_fraction = 0.5` means 5 of those
+nodes form the partial clique, and `clique_edge_density = 0.9` means 90%
+of the possible edges within the clique are present.
+
+## Visualizing the Adjacency Matrix
+
+We can visualize the adjacency matrix as a heatmap to see the structure
+of the graph:
+
+```{r, fig.align="center", fig.width=5, fig.height=5}
+image(simulation$adj_mat,
+      main = "Adjacency Matrix Heatmap",
+      col = c("white", "steelblue"),
+      xaxt = "n", yaxt = "n")
+```
+
+The darker region in the upper-left corner corresponds to the embedded
+partial clique among the first few nodes.
+
+## Computing the Maximal Partial Clique
+
+The `compute_maximal_partial_clique()` function takes an adjacency matrix
+and a required edge density `alpha`, and returns the largest subset of
+nodes that forms a partial clique at that density.
+
+```{r}
+res <- UWBiost561::compute_maximal_partial_clique(
+  adj_mat = simulation$adj_mat,
+  alpha = 0.9
+)
+
+res
+```
+
+- `clique_idx`: the node indices identified as part of the maximal partial clique
+- `edge_density`: the actual edge density among those nodes (should be >= `alpha`)
+
+## Verifying the Result
+
+We can verify that the returned nodes satisfy the required edge density:
+
+```{r}
+idx <- res$clique_idx
+m <- length(idx)
+submat <- simulation$adj_mat[idx, idx]
+
+# Number of edges (excluding diagonal)
+num_edges <- (sum(submat) - m) / 2
+max_edges <- m * (m - 1) / 2
+
+cat("Nodes in clique:  ", idx, "\n")
+cat("Clique size:      ", m, "\n")
+cat("Edges found:      ", num_edges, "\n")
+cat("Max possible:     ", max_edges, "\n")
+cat("Edge density:     ", round(num_edges / max_edges, 3), "\n")
+cat("Required alpha:    0.9\n")
+```
+
+## Scaling Up
+
+Let's try a larger graph to see how the functions scale:
+
+```{r}
+set.seed(42)
+simulation_large <- UWBiost561::generate_partial_clique(
+  n = 20,
+  clique_fraction = 0.4,
+  clique_edge_density = 0.85
+)
+
+res_large <- UWBiost561::compute_maximal_partial_clique(
+  adj_mat = simulation_large$adj_mat,
+  alpha = 0.85
+)
+
+cat("Graph size:        20 nodes\n")
+cat("Expected clique:  ", round(20 * 0.4), "nodes\n")
+cat("Found clique:     ", length(res_large$clique_idx), "nodes\n")
+cat("Edge density:     ", round(res_large$edge_density, 3), "\n")
+```
+
+## Summary
+
+The `UWBiost561` package provides a simple workflow for studying partial
+cliques in random graphs:
+
+1. Use `generate_partial_clique()` to simulate a graph with a known partial clique
+2. Use `compute_maximal_partial_clique()` to recover the partial clique
+3. Verify the result by checking the edge density of the returned nodes
