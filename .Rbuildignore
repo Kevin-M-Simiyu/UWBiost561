@@ -4,3 +4,6 @@
 ^HW3\.Rmd$
 ^HW3\.html$
 ^UWBiost561\.Rproj$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
