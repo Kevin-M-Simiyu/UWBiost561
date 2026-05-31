@@ -31,6 +31,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/UWBiost561.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
@@ -53,8 +54,91 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-Functions for generating random graphs with partial cliques and computing maximal partial cliques, developed for UW BIOST 561.
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="uwbiost561">UWBiost561<a class="anchor" aria-label="anchor" href="#uwbiost561"></a>
+</h1></div>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p><code>UWBiost561</code> is an R package developed for the University of Washington BIOST 561 course (Spring 2026). The package provides functions for generating random graphs with partial cliques and computing the maximal partial clique from an adjacency matrix.</p>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the package from GitHub with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Kevin-M-Simiyu/UWBiost561"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="main-functions">Main Functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
+</h2>
+<div class="section level3">
+<h3 id="generate_partial_clique">
+<code>generate_partial_clique()</code><a class="anchor" aria-label="anchor" href="#generate_partial_clique"></a>
+</h3>
+<p>Generates a random adjacency matrix with a partial clique of a specified size and edge density.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">UWBiost561</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu">UWBiost561</span><span class="fu">::</span><span class="fu"><a href="reference/generate_partial_clique.html">generate_partial_clique</a></span><span class="op">(</span></span>
+<span>  n <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  clique_fraction <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  clique_edge_density <span class="op">=</span> <span class="fl">0.9</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">simulation</span><span class="op">$</span><span class="va">adj_mat</span></span></code></pre></div>
+<ul>
+<li>
+<code>n</code>: number of nodes in the graph</li>
+<li>
+<code>clique_fraction</code>: fraction of nodes that form the partial clique</li>
+<li>
+<code>clique_edge_density</code>: edge density among the nodes in the clique (1 = fully connected)</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="compute_maximal_partial_clique">
+<code>compute_maximal_partial_clique()</code><a class="anchor" aria-label="anchor" href="#compute_maximal_partial_clique"></a>
+</h3>
+<p>Computes the largest partial clique in a given adjacency matrix at a required edge density <code>alpha</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu">UWBiost561</span><span class="fu">::</span><span class="fu"><a href="reference/generate_partial_clique.html">generate_partial_clique</a></span><span class="op">(</span></span>
+<span>  n <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  clique_fraction <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  clique_edge_density <span class="op">=</span> <span class="fl">0.9</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">UWBiost561</span><span class="fu">::</span><span class="fu"><a href="reference/compute_maximal_partial_clique.html">compute_maximal_partial_clique</a></span><span class="op">(</span></span>
+<span>  adj_mat <span class="op">=</span> <span class="va">simulation</span><span class="op">$</span><span class="va">adj_mat</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.9</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">clique_idx</span>     <span class="co"># indices of nodes in the maximal partial clique</span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">edge_density</span>   <span class="co"># edge density among the selected nodes</span></span></code></pre></div>
+<ul>
+<li>
+<code>adj_mat</code>: a symmetric adjacency matrix with values 0 or 1 and 1s on the diagonal</li>
+<li>
+<code>alpha</code>: required edge density threshold (between 0.5 and 1)</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+</h2>
+<p>The package includes vignettes for Homework 1 through 4 from the BIOST 561 course:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"UWBiost561"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
+<p>MIT</p>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
