@@ -1,0 +1,9 @@
+pandoc: 3.6.3
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  HW1: HW1.html
+  HW2: HW2.html
+  HW3: HW3.html
+  HW4: HW4.html
+last_built: 2026-05-31T04:33Z
